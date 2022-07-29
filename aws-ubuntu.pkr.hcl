@@ -15,11 +15,13 @@ locals {
 source "amazon-ebs" "ubuntu" {
   ami_name      = "lab_ami-${local.timestamp}"
   instance_type = "t2.micro"
-  region        = "eu-west-1"
-  vpc_id        = "vpc-06705f43e25893c54"
-  subnet_id     = "subnet-072a67f738125b7c4"
+  region        = "ap-northeast-3"
+  vpc_id        = "vpc-0b378ca58d43f574c"
+  // region        = "eu-west-1"
+  // vpc_id        = "vpc-06705f43e25893c54"
+  // subnet_id     = "subnet-072a67f738125b7c4"
   deprecate_at  = "2023-07-29T23:59:59Z"
-
+  //  ssh_timeout = "20m"
 
 
 
@@ -37,10 +39,11 @@ source "amazon-ebs" "ubuntu" {
 
 build {
   name = "learn-packer"
+    
   sources = [
     "source.amazon-ebs.ubuntu"
   ]
-
+ 
 
   provisioner "ansible" {
     playbook_file = "./playbooks/apache2.yml"
